@@ -1,19 +1,43 @@
 <template>
   <div class="hello">
-      <h1>{{ toto.count }}</h1>
+      <h1>count1 = {{ count1 }}</h1>
+      <h1>count2 = {{ count2 }}</h1>
+      <br>
+      <button @click="log">LOG</button>
   </div>
 </template>
 
 <script>
-import {toRefs} from 'vue'
+import {ref,toRefs} from 'vue'
 import useCounter from "@/hooks/useCounter.js"
 export default {
   setup() {
-      const {state:stateCounter } = useCounter;
+      const counter = useCounter(); 
+
+      const log = ()=>{
+          console.log("counter.state",counter.state1);
+          console.log("counter.state2",counter.state2);
+          console.log(`xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`);
+          console.log("counter.state.count = ",counter.state1.count);
+          console.log("counter.state2.count = ",counter.state2.value.count);
+
+          counter.state1.count = 555;
+          counter.state2.value.count = 4444;
+      };
+
+      const hey = {
+        setup : ()=>{
+          console.log('setup')
+        }
+
+      };
+
+      hey.setup();
 
       return {
-        toto: toRefs(stateCounter),
-        stateCounter: stateCounter
+        log,
+        count1: counter.state1,
+        count2: counter.state2
       }
   }
 }

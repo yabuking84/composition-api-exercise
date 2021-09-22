@@ -10,13 +10,12 @@ import useCounter from "@/hooks/useCounter.js"
 
 export default {
   setup() {
-      const {methods:methodsCounter } = useCounter;
-
+      const counter = useCounter();
       const dec = ()=>{
-          useCounter.methods.decrease();
+          counter.methods.decrease();
       }
       const inc = ()=>{
-          useCounter.methods.increase();
+          counter.methods.increase();
       }
       return {
           dec,
