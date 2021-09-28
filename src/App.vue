@@ -1,18 +1,20 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <Home/>
-  <Adder/>
+
+  <CountMain/>
+  <BoxMain v-if="false"/>
+
 </template>
 
 <script>
-import Home from './components/Home.vue'
-import Adder from './components/Adder.vue'
+import BoxMain from '@/components/BoxMain.vue'
+import CountMain from '@/components/CountMain.vue'
+
 
 export default {
   name: 'App',
   components: {
-    Home,
-    Adder
+    CountMain,
+    BoxMain,
   }
 }
 </script>
