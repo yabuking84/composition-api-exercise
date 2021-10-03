@@ -1,4 +1,5 @@
-import {ref, onMounted, reactive, readonly} from 'vue'
+import {ref, onMounted, reactive, readonly, computed} from 'vue'
+import {store} from '@/store'
 
 const state1 = reactive({
     count: 1,
@@ -27,6 +28,11 @@ const stateArr2 = ref({
 
 export default function useCounter(){
 
+    const data1 = computed(()=>{
+        return store.getters['data1']
+    }) 
+
+    // const data1 = store.getters['data1']
 
     const methods = {
         decrease: ()=>{
@@ -40,16 +46,21 @@ export default function useCounter(){
 
             stateArr1.arrs = ['decrease1','decrease2'];
             stateArr2.value.arrs = ['decrease1','decrease2'];
-            
+
             arrayReactive.push(['decrease1','decrease2']);
             arrayRef.value = ['decrease1','decrease2'];
-            
+
+            store.dispatch('setData1',state1.count);
+
         },
         increase: ()=>{
             state1.count++
             state2.value.count++
             console.log('increase = '+state1.count);
+
+            store.dispatch('setData1',state1.count);
         },
+
     }
 
     // onMounted(()=>{
@@ -74,6 +85,7 @@ export default function useCounter(){
         getters,
         arrayReactive,
         arrayRef,
+        data1,
     }
 
 }

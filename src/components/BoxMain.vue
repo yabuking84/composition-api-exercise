@@ -1,26 +1,29 @@
 <template>
 
-
+<!-- 
   <button @click="data.crntPage=0">restart</button>
   <br>
   <button @click="prev">prev</button>
   <button @click="next">next</button>
-  <br>
+  <br> -->
   <!-- <div class="slide-container">
       <component :is="'Box1'"></component>
       <component :is="'Box2'"></component>
   </div>
   <br>
   <br> -->
-
-  <Slide :to="data.slideTo">
-    <component :is="data.pages[data.crntPage]"></component>
-    <template v-slot:h1>
+    <!-- <template v-slot:h1>
       extra111
     </template>
     <template #h3="slotProps">
       extra222 {{slotProps.slideTo}}
-    </template>
+    </template> -->
+
+    
+  <Slide :to="data.slideTo" @prev="prev" @next="next">
+    <keep-alive>
+      <component :is="data.pages[data.crntPage]" @prev="prev" @next="next"></component>
+    </keep-alive>
   </Slide>
 </template>
 
@@ -63,7 +66,6 @@ export default {
     }
     const next = ()=>{
       data.slideTo = 'left'
-      console.log(data.crntPage);
       if(data.crntPage<data.pages.length-1)
       data.crntPage++
       else 

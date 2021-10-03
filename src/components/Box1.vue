@@ -1,29 +1,41 @@
 <template lang="">
-  <div>
+  <main>
     <h1>Box1</h1> 
-  </div>
+    <br>
+    <div>
+      <button type="button" @click="next">next</button>
+    </div>
+  </main>
 </template>
 <script>
 export default {
-  setup(){
-
+  setup(_, context){
+    const next = ()=>{
+      context.emit('next')
+    }
+    return {
+      next
+    }
   }
 }
 </script>
 <style scoped>
-div {
-  background-color: red;
+main {
+  background-color: green;
 }
-div {
+main {
   width: 100%;
-  height: 50vw;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 
-div h1 {
+main h1 {
   color: white;
+  background-color: #000;
+  padding: 10px;    
 }
   
 </style>
