@@ -15,12 +15,15 @@
       <pre>{{stateArr2.arrs}}</pre>
       <br>
       Vuex.data1 = {{counter.data1}}
+      <br>
+      <button type="button" @click="changeButton">{{button}}</button>
+      <button type="button" @click="changeButton">{{button2}}</button>
 
   </div>
 </template>
 
 <script>
-import {ref,toRefs,computed} from 'vue'
+import {ref,toRefs,computed, reactive} from 'vue'
 import useCounter from "@/hooks/useCounter.js"
 import {store} from '@/store'
 export default {
@@ -35,6 +38,17 @@ export default {
 
       const data1 = counter.data1
 
+
+      const state = reactive({
+        button: 'ohllalala',
+        button2: 'mmmmm'
+      }) 
+
+      const changeButton = ()=>{
+        state.button2 = state.button
+        state.button = 'asdsadsd'
+      }
+
       return {
         counter,
         stateArr2: counter.stateArr2,
@@ -43,6 +57,8 @@ export default {
         count1: counter.state1.count,
         hoho,
         data1,
+        ...toRefs(state),
+        changeButton,
       }
   }
 }
